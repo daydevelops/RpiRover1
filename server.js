@@ -1,7 +1,12 @@
 const express = require('express');
 const fs = require('fs');
+const hbs = require('hbs');
 
 const app = express();
+
+hbs.registerPartials(__dirname + '/views/partials')
+app.use(express.static(__dirname+'/public'));
+app.set('view engine','hbs');
 
 app.use((req,res,next) => {
     var now = new Date().toString();
@@ -15,7 +20,7 @@ app.use((req,res,next) => {
 })
 
 app.get('/',(req,res) => {
-    res.send('Hello Wrold');
+    res.render('index.hbs');
 });
 
 app.listen(3000, () => {

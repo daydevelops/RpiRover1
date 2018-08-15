@@ -18,6 +18,7 @@
   "homepage": "https://github.com/daydevelops/RpiRover1#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "hbs": "^4.0.1"
   }
 }
