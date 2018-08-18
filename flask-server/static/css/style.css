@@ -1,0 +1,27 @@
+body, html {
+    color:#CCC;
+    background-color:black;
+    font-family:monospace;
+}
+#controller-div a, #sensor-div a {
+    color:white;
+}
+#controller-div, #sensor-div {
+    padding:50px;
+    font-size:60px;
+    border-radius:30px;
+    margin-top:30px;
+    color:#CCC;
+}
+#controller-div {
+    background-color:#33A;
+}
+#sensor-div {
+    background-color:#3A3;
+}
+#controller-div:hover, #sensor-div:hover {
+    box-shadow:2px 2px 2px #CCC;
+}
+#controller-div:hover > a, #sensor-div:hover > a {
+    color:white;
+}
