@@ -7,9 +7,7 @@
 </head>
 <body>
     <header>
-        <br><hr><br>
         <h1 class='text-center'>RpiRover1</h1>
-        <br><hr><br>
     </header>
     <main>
         <div class='container-fluid'>
@@ -21,6 +19,26 @@
                 </div>
                 <div class='col-md-4'>
                     <button class='btn btn-success btn-lrg' onclick='openSocket()'>Open connection</button>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-12'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>X</th>
+                                <th>Y</th>
+                                <th>Z</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id='xout'></td>
+                                <td id='yout'></td>
+                                <td id='zout'></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

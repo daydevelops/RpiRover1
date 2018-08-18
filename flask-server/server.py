@@ -22,10 +22,7 @@ def showSensor():
 
 
 
-def ack():
-    print "JS recieved the reply!"
-
-@socketio.on('connect', namespace='/test')
+@socketio.on('connect')
 def test_connect():
     emit('my response', {'data': 'Connected'})
     print("client has connected")
@@ -37,28 +34,18 @@ def test_disconnect():
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
-    send("we receieved your message: '" + message + "'")
+    #send("we receieved your message: '" + message + "'")
 
 @socketio.on('json')
 def handle_json(json):
     print('received json: ' + str(json))
     emit()
 
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    print "PY: message recieved: " + json
-    emit('hello from py, we saw your message: ' + json)
+@socketio.on('accelData')
+def addData(msg):
+    print("ACCDATA: " + msg)
 
-@socketio.on('plzSqr')
-def squareNumber(num):
-    if isinstance(num, numbers.Number):
-        emit(num*num)
-    else:
-        print("request to square number :" + num)
-        num = float(num)
-        emit('plzSqr-res',num*num)
-    #emit(num*num)
 
 # run the application
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app,"192.168.2.30")
