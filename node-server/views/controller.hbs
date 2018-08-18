@@ -1,0 +1,25 @@
+{{> head}}
+{{> header}}
+    <table>
+        <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id='xout'></td>
+                <td id='yout'></td>
+                <td id='zout'></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class='btn btn-success btn-lrg' onClick='openSocket()'>Open Connection</button>
+    <script src='assets/socket.js'></script>
+    <!--
+    <script src='assets/accel.js'></script>
+    -->
+    {{> footer}}
