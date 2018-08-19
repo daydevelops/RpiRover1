@@ -6,7 +6,9 @@ import numbers
 import sys
 
 sys.path.append('robot-control')
-import testdrive.py
+import initializeRobot
+
+initializeRobot.sayHi()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -47,8 +49,8 @@ def handle_json(json):
 @socketio.on('accelData')
 def addData(msg):
     print("ACCDATA: " + msg)
-    processAccData(msg)
+    #processAccData(msg)
 
 # run the application
 if __name__ == "__main__":
-    socketio.run(app,"192.168.2.30")
+    socketio.run(app,"192.168.2.19")

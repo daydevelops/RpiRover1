@@ -1,4 +1,9 @@
 var socket;
+
+addEventListener('load',() => {
+	toggleSocketBtn('isclosed');
+})
+
 function openSocket() {
     console.log('JS: opening socket connection');
     socket = io.connect('http://' + document.domain + ':' + location.port);
@@ -13,11 +18,13 @@ function openSocket() {
     });
 
     initAccel();
+    
+    toggleSocketBtn('isopen');
 }
 
 function closeSocket() {
-
-
+	toggleSocketBtn('isclosed');
+	socket.disconnect();
 }
 function initAccel() {
     // socket.emit('message', JSON.stringify("initAccel, time: " + Date.now()));
@@ -32,21 +39,6 @@ function initAccel() {
             'z':(Math.round(event.alpha*100))/100,
             't':Date.now()
         }))
-        // socket.emit('message', JSON.stringify("inside listener, time: " + Date.now()));
-        // alert('hi');
-        // var alpha;
-        // if (event.absolute) {
-        //     alpha = event.alpha;
-        // } else if (event.hasOwnProperty('webkitCompassHeading')) {
-        //     // get absolute orientation for Safari/iOS
-        //     alpha = 360 - event.webkitCompassHeading; // conversion taken from a comment on Google Documentation, not tested
-        // } else {
-        //     console.log('Could not retrieve absolute orientation');
-        // }
-        // console.log(alpha);
-        // xout.innerHTML = (Math.round(event.beta*100))/100;
-        // yout.innerHTML = (Math.round(event.gamma*100))/100;
-        // zout.innerHTML = (Math.round(event.alpha*100))/100;
     });
     // socket.emit('message', JSON.stringify("listener added, time: " + Date.now()));
     window.addEventListener("compassneedscalibration", function(event) {
@@ -54,3 +46,26 @@ function initAccel() {
         event.preventDefault();
     }, true);
  }
+
+function toggleSocketBtn(cmd) {
+	if (cmd==='isopen') {
+		
+        var btn = document.querySelector('#open-close-socket');
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-danger');
+        btn.innerHTML = 'Close Socket';
+        btn.removeEventListener('click',openSocket);
+        btn.addEventListener('click',closeSocket)
+        
+    } else if (cmd==='isclosed') {
+		
+        var btn = document.querySelector('#open-close-socket');
+        btn.classList.add('btn-primary');
+        btn.classList.remove('btn-danger');
+        btn.innerHTML = 'Open Socket';
+        btn.addEventListener('click',openSocket);
+        btn.removeEventListener('click',closeSocket)
+        
+	}
+}
+		
