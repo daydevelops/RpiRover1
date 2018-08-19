@@ -3,7 +3,10 @@ from flask import render_template
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import numbers
+import sys
 
+sys.path.append('robot-control')
+import testdrive.py
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -44,7 +47,7 @@ def handle_json(json):
 @socketio.on('accelData')
 def addData(msg):
     print("ACCDATA: " + msg)
-
+    processAccData(msg)
 
 # run the application
 if __name__ == "__main__":
