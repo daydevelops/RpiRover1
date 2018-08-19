@@ -6,9 +6,12 @@ import numbers
 import sys
 
 sys.path.append('robot-control')
-import initializeRobot
+import robotController
+#import testdrive
 
-initializeRobot.sayHi()
+#testdrive.initRobot()
+
+#initializeRobot.sayHi()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -31,6 +34,8 @@ def showSensor():
 def test_connect():
     emit('my response', {'data': 'Connected'})
     print("client has connected")
+    global robot 
+    robot = RobotController.initRobot()
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
@@ -48,8 +53,7 @@ def handle_json(json):
 
 @socketio.on('accelData')
 def addData(msg):
-    print("ACCDATA: " + msg)
-    #processAccData(msg)
+	robotController.driveRobot(robot,msg)
 
 # run the application
 if __name__ == "__main__":
