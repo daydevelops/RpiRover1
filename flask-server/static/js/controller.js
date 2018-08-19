@@ -12,20 +12,7 @@ function openSocket() {
         console.log('JS: Hey, we got a message: ' + msg)
     });
 
-    $('#num-input').keyup(() => {
-        if ($('#num-input').val() !=='') {
-            socket.emit('plzSqr', $('#num-input').val());
-        }
-    })
-
-    socket.on('plzSqr-res',(msg) => {
-        $('#num-output').html(msg);
-    })
-
-
     initAccel();
-
-
 }
 
 function closeSocket() {
