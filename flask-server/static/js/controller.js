@@ -26,11 +26,8 @@ function closeSocket() {
 	toggleSocketBtn('isclosed');
 	socket.disconnect();
 }
+
 function initAccel() {
-    // socket.emit('message', JSON.stringify("initAccel, time: " + Date.now()));
-    var xout = document.querySelector('#xout'); //beta
-    var yout = document.querySelector('#yout'); //gamma
-    var zout = document.querySelector('#zout'); //alpha
     window.addEventListener('deviceorientation', function(event) {
 
         socket.emit('accelData', JSON.stringify({
@@ -45,7 +42,7 @@ function initAccel() {
         alert('Your compass needs calibrating! Wave your device in a figure-eight motion');
         event.preventDefault();
     }, true);
- }
+}
 
 function toggleSocketBtn(cmd) {
 	if (cmd==='isopen') {

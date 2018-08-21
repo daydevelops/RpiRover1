@@ -140,3 +140,9 @@ class Robot(object):
         else:
             self._right_speed(-1*speed)
             self._right.run(Adafruit_MotorHAT.BACKWARD)
+
+    def setLeftTrim(trim):
+        self._left_trim = trim
+
+    def setRightTrim(trim):
+        self._right_trim = trim

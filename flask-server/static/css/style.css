@@ -1,8 +1,11 @@
+/* GLOBAL */
 body, html {
     color:#CCC;
     background-color:black;
     font-family:monospace;
 }
+
+/* HOME PAGE */
 #controller-div a, #sensor-div a {
     color:white;
 }
@@ -25,3 +28,14 @@ body, html {
 #controller-div:hover > a, #sensor-div:hover > a {
     color:white;
 }
+
+/* CONTROLLER */
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+}
+
