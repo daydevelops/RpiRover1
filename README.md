@@ -7,10 +7,8 @@ This project uses a Flask server with a SocketIO connection between server and c
 The data that is transmitted thus far is accelerometer data from a mobile device connected to the server.
 
 ## Next steps:
-On the server side, convert the accelerometer data to acceptable inputs for the motor controller.
+Build touch screen controller to replace accelerometer input (fun but not practical)
 
-Send dummy data from the server to the motor controller to test communications
+Add motor trim inputs with variable storage
 
-Add buttons to the client user interface to start up or shut down the motor controller
-
-Send accelerometer data from the client to the motor controller
+add logging for inputs, socket sessions, sensory outputs, and motor controller commands
