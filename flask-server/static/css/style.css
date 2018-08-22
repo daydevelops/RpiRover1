@@ -1,3 +1,4 @@
+
 /* GLOBAL */
 body, html {
     color:#CCC;
@@ -30,6 +31,59 @@ body, html {
 }
 
 /* CONTROLLER */
+#controller-wrap {
+	height:260px;
+	width:500px;
+	border:1px solid red;
+	position:absolute;
+	top:50vh;
+	left:50vw;
+	transform:translateY(-50%) translateX(-50%);
+	padding:15px;
+}
+#open-close-socket {
+	height:60px;
+	width:100px;
+	display:block;
+	margin:auto;
+	margin-top:100px;
+}
+#connected {
+	display:none;
+}
+#top-row {
+	height:75%;
+}
+#bottom-row {
+	height:25%;
+	padding-top:10px
+}
+#speed-input {
+	height:100%;
+}
+#heading-input {
+	width:100%;
+	margin-top:15px;
+	float:right;
+}
+#cam-wrapper {
+	background-color:#ffffff21
+}
+#rmtrim-val, #lmtrim-val {
+	margin: 10px 0px 10px 0px;
+}
+#shut-down-btn {
+	width:100%;
+	height:80%;
+	position:relative;
+	top:5px;
+}
+#cam-text {
+	position:relative;
+	top:-13px;
+	margin-left:20px;
+	margin-right:20px;
+}
 input[type=range][orient=vertical]
 {
     writing-mode: bt-lr; /* IE */
@@ -38,4 +92,9 @@ input[type=range][orient=vertical]
     height: 175px;
     padding: 0 5px;
 }
+
+
+
+
+
 

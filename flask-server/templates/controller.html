@@ -8,58 +8,57 @@
 </head>
 <body>
 
-    <header>
-        <h1 class='text-center'>RpiRover1</h1>
-    </header>
-    <main>
-        <div class='container-fluid'>
-            <div class='row'>
-                <div class='col-6'>
-					<button class='d-inline btn btn-lrg' id='open-close-socket'></button>			
-                </div>
-                <div class='col-6'>
-					<button id='on-off-robot' class='d-inline btn btn-lrg'></button>
+    <main id='controller-wrap'>
+        <div class='container-fluid'><!-- show this row if user not connect -->
+				<div class='row'>
+					<div class='col-12'>
+						<button class='d-block btn btn-lrg' id='open-close-socket'></button>			
+					</div>
 				</div>
-            </div>
-            <div class='row'>
-				<div class='col-2'>
-					<!-- Speed slider -->
-					<input type='range' orient='vertical'>
-				</div>
-				<div class='col-10'>
-					<div class='row'>
-						<div class='col-6'>
+			</div>
+			<div id='connected'> <!-- show these rows when connected -->
+					<div class='row' id='top-row'>
+						<div class='col-2' id='speed-col'>
+							<!-- Speed slider -->
+							<input id='speed-input' type='range' orient='vertical'>
+						</div>
+						<div class='col-6' >
 							<!-- cam -->
 							<div id='cam-wrapper'>
 								<canvas>
 								</canvas>
 							</div>
 						</div>
-						<div class='col-3'>
+						<div class='col-2'>
 							<!-- left motor trim -->
-							<i class='d-block fas fa-angle-up fa-3x'></i>
-							<p id='lmtrim-val'>0</p>
-							<i class='d-block fas fa-angle-down fa-3x'></i>
+							<i class='text-center d-block fas fa-angle-up fa-3x'></i>
+							<p id='lmtrim-val' class='text-center'>0</p>
+							<i class='text-center d-block fas fa-angle-down fa-3x'></i>
 						</div>
-						<div class='col-3'>
+						<div class='col-2'>
 							<!-- right motor trim -->
-							<i class='d-block fas fa-angle-up'></i>
-							<p id='rmtrim-val'>0</p>
-							<i class='d-block fas fa-angle-down'></i>
+							<i class='text-center d-block fas fa-angle-up fa-3x'></i>
+							<p id='rmtrim-val' class='text-center'>0</p>
+							<i class='text-center d-block fas fa-angle-down fa-3x'></i>
 						</div>
 					</div>
-					<div class='row'>
-						<div class='col-4'>
+					<div class='row' id='bottom-row'>
+						<div class='col-2 p-0'>
+							<button class='btn btn-lrg btn-danger' id='shut-down-btn'>
+								OFF
+							</button>
+						</div>
+						<div class='col-6 text-center'>
 							<!-- cam yaw -->
-							<i class='d-inline fas fa-angle-left'></i>
-							<i class='d-inline fas fa-angle-right'></i>
+							<i class='d-inline fas fa-angle-left fa-3x'></i>
+							<span id='cam-text'>Camera</span>
+							<i class='d-inline fas fa-angle-right fa-3x'></i>
 						</div>
-						<div class='col-8'>
+						<div class='col-4'>
 							<!-- robot heading -->
-							<input type='range'>
+							<input id='heading-input' type='range'>
 						</div>
 					</div>
-				</div>
 			</div>
         </div>
     </main>
