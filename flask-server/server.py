@@ -6,7 +6,7 @@ import numbers
 import sys
 
 sys.path.append('robot-control')
-import robotController
+#import robotController # commented out while working on remote
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -38,7 +38,7 @@ def test_connect():
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected')
-    robot.stop()
+    # robot.stop() # commented out while working on remote
 
 @socketio.on('message')
 def handle_message(message):
@@ -51,21 +51,25 @@ def handle_json(json):
 
 @socketio.on('initRobot')
 def initRobot():
-    global robot 
-    robot = RobotController.initRobot()
-	
+    print('Initializing Robot')
+    # global robot  # commented out while working on remote
+    # robot = RobotController.initRobot()
+
 @socketio.on('shutDownRobot')
 def shutDownRobot():
-	robot.stop()
-	
+    print('Shutting Down Robot')
+	# robot.stop() # commented out while working on remote
+
 
 @socketio.on('leftTrim')
 def updateLeftTrim(trim):
-	robot.setLeftTrim(trim)
-	
-@socketio.on('rightTrim') 
+    print('Updating Left Motor Trim: ' + str(trim))
+	# robot.setLeftTrim(trim) # commented out while working on remote
+
+@socketio.on('rightTrim')
 def updateRightTrim(trim):
-	robot.setRightTrim(trim)
+    print('Updating right Motor Trim: ' + str(trim))
+	# robot.setRightTrim(trim) # commented out while working on remote
 
 @socketio.on('accelData')
 def addData(msg):
@@ -77,4 +81,4 @@ def addData(msg):
 
 ### run the application
 if __name__ == "__main__":
-    socketio.run(app,"192.168.2.19")
+    socketio.run(app,"192.168.2.30")
