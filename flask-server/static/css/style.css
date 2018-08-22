@@ -32,8 +32,8 @@ body, html {
 
 /* CONTROLLER */
 #controller-wrap {
-	height:260px;
-	width:500px;
+    height:100vh;
+    width:100vw;
 	border:1px solid red;
 	position:absolute;
 	top:50vh;
@@ -41,9 +41,10 @@ body, html {
 	transform:translateY(-50%) translateX(-50%);
 	padding:15px;
 }
-#open-close-socket {
-	height:60px;
-	width:100px;
+#power-on-btn {
+	height:20%;
+	width:40%;
+    font-size:3em;
 	display:block;
 	margin:auto;
 	margin-top:100px;
@@ -72,7 +73,7 @@ body, html {
 #rmtrim-val, #lmtrim-val {
 	margin: 10px 0px 10px 0px;
 }
-#shut-down-btn {
+#power-off-btn {
 	width:100%;
 	height:80%;
 	position:relative;
@@ -92,9 +93,3 @@ input[type=range][orient=vertical]
     height: 175px;
     padding: 0 5px;
 }
-
-
-
-
-
-

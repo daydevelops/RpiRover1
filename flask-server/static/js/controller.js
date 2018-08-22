@@ -1,68 +1,89 @@
-var socket;
+var socket, connected = false;
 
-addEventListener('load',() => {
-	toggleSocketBtn('isclosed');
-})
+addEventListener('load',setUpControllerEvents);
+
+function setUpControllerEvents() {
+	console.log('page loaded');
+	$('#power-on-btn').click(powerOn);
+	$('#power-off-btn').click(powerOff);
+	// $('#speed-input'). // need to figure out touch and drag events for mobile
+	// $('#heading-input').
+	$('#cam-left').click({'direction':'L'},turnCam);
+	$('#cam-right').click({'direction':'R'},turnCam);
+
+	$('#lmtrim-up').click({
+		'motor':'L',
+		'change':1
+	}, changeTrim)
+
+	$('#lmtrim-down').click({
+		'motor':'L',
+		'change':-1
+	}, changeTrim)
+
+	$('#rmtrim-up').click({
+		'motor':'R',
+		'change':1
+	}, changeTrim)
+
+	$('#rmtrim-down').click({
+		'motor':'R',
+		'change':-1
+	}, changeTrim)
+
+}
+
+function powerOn() {
+	console.log('powering on');
+	openSocket();
+	controllerOn();
+}
+
+function powerOff() {
+	console.log('powering down');
+	closeSocket();
+	controllerOff();
+}
 
 function openSocket() {
-    console.log('JS: opening socket connection');
+    console.log('opening socket connection');
     socket = io.connect('http://' + document.domain + ':' + location.port);
 
     socket.on('connect', function() {
-        console.log('JS: We are connected!')
-        socket.emit('message', JSON.stringify("hello from JS, time: " + Date.now()));
+        console.log('We are connected!')
+		connected = true;
     });
-
-    socket.on('message', function(msg){
-        console.log('JS: Hey, we got a message: ' + msg)
-    });
-
-    initAccel();
-    
-    toggleSocketBtn('isopen');
 }
 
 function closeSocket() {
-	toggleSocketBtn('isclosed');
+	// send disconnect msg to server
 	socket.disconnect();
+	console.log('We have disconnected');
+	connected = false;
 }
 
-function initAccel() {
-    window.addEventListener('deviceorientation', function(event) {
 
-        socket.emit('accelData', JSON.stringify({
-            'x':(Math.round(event.beta*100))/100,
-            'y':(Math.round(event.gamma*100))/100,
-            'z':(Math.round(event.alpha*100))/100,
-            't':Date.now()
-        }))
-    });
-    // socket.emit('message', JSON.stringify("listener added, time: " + Date.now()));
-    window.addEventListener("compassneedscalibration", function(event) {
-        alert('Your compass needs calibrating! Wave your device in a figure-eight motion');
-        event.preventDefault();
-    }, true);
+function controllerOn() {
+	$('#not-connected').css('display','none');
+	$('#connected').css('display','block');
 }
 
-function toggleSocketBtn(cmd) {
-	if (cmd==='isopen') {
-		
-        var btn = document.querySelector('#open-close-socket');
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-danger');
-        btn.innerHTML = 'Close Socket';
-        btn.removeEventListener('click',openSocket);
-        btn.addEventListener('click',closeSocket)
-        
-    } else if (cmd==='isclosed') {
-		
-        var btn = document.querySelector('#open-close-socket');
-        btn.classList.add('btn-primary');
-        btn.classList.remove('btn-danger');
-        btn.innerHTML = 'Open Socket';
-        btn.addEventListener('click',openSocket);
-        btn.removeEventListener('click',closeSocket)
-        
-	}
+function controllerOff() {
+	$('#connected').css('display','none');
+	$('#not-connected').css('display','block');
 }
-		
+
+
+function updateMotorSpeeds() {
+	// read value of both sliders and send to server
+}
+
+function changeTrim(event) {
+	// tell server to change trim by 1
+	console.log(JSON.stringify(event.data,undefined,4));
+}
+
+function turnCam(event) {
+	// send change in camera heading left
+	console.log(JSON.stringify(event.data,undefined,4));
+}
