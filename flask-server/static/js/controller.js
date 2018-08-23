@@ -3,7 +3,9 @@ var socket, connected = false;
 addEventListener('load',setUpControllerEvents);
 
 function setUpControllerEvents() {
+
 	console.log('page loaded');
+
 	$('#power-on-btn').click(powerOn);
 	$('#power-off-btn').click(powerOff);
 	// $('#speed-input'). // need to figure out touch and drag events for mobile
@@ -11,25 +13,10 @@ function setUpControllerEvents() {
 	$('#cam-left').click({'direction':'L'},turnCam);
 	$('#cam-right').click({'direction':'R'},turnCam);
 
-	$('#lmtrim-up').click({
-		'motor':'L',
-		'change':1
-	}, changeTrim)
-
-	$('#lmtrim-down').click({
-		'motor':'L',
-		'change':-1
-	}, changeTrim)
-
-	$('#rmtrim-up').click({
-		'motor':'R',
-		'change':1
-	}, changeTrim)
-
-	$('#rmtrim-down').click({
-		'motor':'R',
-		'change':-1
-	}, changeTrim)
+	$('#lmtrim-up').click({'motor':'L','change':1}, changeTrim);
+	$('#lmtrim-down').click({'motor':'L','change':-1}, changeTrim);
+	$('#rmtrim-up').click({'motor':'R','change':1}, changeTrim);
+	$('#rmtrim-down').click({'motor':'R','change':-1}, changeTrim);
 
 }
 
@@ -80,6 +67,15 @@ function updateMotorSpeeds() {
 
 function changeTrim(event) {
 	// tell server to change trim by 1
+	if (event.data.motor == 'L') {
+		var current_val = $('#lmtrim-val').html() * 1;
+		$('#lmtrim-val').html(current_val + event.data.change);
+		socket.emit('leftTrim',event.data.change);
+	} else {
+		var current_val = $('#rmtrim-val').html() * 1;
+		$('#rmtrim-val').html(current_val + event.data.change);
+		socket.emit('rightTrim',event.data.change);
+	}
 	console.log(JSON.stringify(event.data,undefined,4));
 }
 
