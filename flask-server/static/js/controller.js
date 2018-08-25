@@ -13,10 +13,10 @@ function setUpControllerEvents() {
 	$('#cam-left').click({'direction':'L'},turnCam);
 	$('#cam-right').click({'direction':'R'},turnCam);
 
-	$('#lmtrim-up').click({'motor':'L','change':1}, changeTrim);
-	$('#lmtrim-down').click({'motor':'L','change':-1}, changeTrim);
-	$('#rmtrim-up').click({'motor':'R','change':1}, changeTrim);
-	$('#rmtrim-down').click({'motor':'R','change':-1}, changeTrim);
+	$('#lmtrim-up').click({'L':1,'R':0}, changeTrim);
+	$('#lmtrim-down').click({'L':-1,'R':0}, changeTrim);
+	$('#rmtrim-up').click({'L':0,'R':1}, changeTrim);
+	$('#rmtrim-down').click({'L':0,'R':-1}, changeTrim);
 
 }
 
@@ -78,17 +78,8 @@ function updateMotorSpeeds() {
 }
 
 function changeTrim(event) {
-	// tell server to change trim by 1
-	if (event.data.motor == 'L') {
-		var current_val = $('#lmtrim-val').html() * 1;
-		$('#lmtrim-val').html(current_val + event.data.change);
-		socket.emit('leftTrim',event.data.change);
-	} else {
-		var current_val = $('#rmtrim-val').html() * 1;
-		$('#rmtrim-val').html(current_val + event.data.change);
-		socket.emit('rightTrim',event.data.change);
-	}
-	console.log(JSON.stringify(event.data,undefined,4));
+	socket.emit('updateTrim',{'L':event.data.L, 'R':event.data.R});
+	console.log('asking server to update trim');
 }
 
 function turnCam(event) {

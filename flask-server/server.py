@@ -67,14 +67,11 @@ def shutDownRobot():
 
 
 @socketio.on('leftTrim')
-def updateLeftTrim(trim):
-    print('Updating Left Motor Trim: ' + str(trim))
-	# robot.setLeftTrim(trim) # commented out while working on remote
+def updateLeftTrim(changeL,changeR):
+    # input change is 1 or -1
+	trim = robotController.updateTrim(changeL,changeR)
+    print('Updating Motor Trim: L->' + str(trim['L']) + ' R->' + str(trim['R']))
 
-@socketio.on('rightTrim')
-def updateRightTrim(trim):
-    print('Updating right Motor Trim: ' + str(trim))
-	# robot.setRightTrim(trim) # commented out while working on remote
 
 @socketio.on('accelData')
 def addData(msg):
