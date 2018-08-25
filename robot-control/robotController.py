@@ -21,7 +21,7 @@ def driveRobot(robot,data):
 	robot.leftM(int(motorSpeeds['LM']))
 	robot.rightM(int(motorSpeeds['RM']))
 
-def updateTrim(changeL,changeR):
+def updateTrim(robot,changeL,changeR):
     # get trim from db
     trims = getTrimValues()
     ltrim = trims['L']
@@ -31,13 +31,13 @@ def updateTrim(changeL,changeR):
     rtrim = rtrim + changeR
     # save to DB
     conn = mongo.MDB()
-    trims = conn.updateTrimValues(ltrim,rtrim)
+    conn.updateTrimValues(ltrim,rtrim)
     conn.close()
-    # update robot
-    robot.setLeftTrim(ltrim)
-    robot.setRightTrim(rtrim)
+    # update robot, commented out when working on remote machine
+    # robot.setLeftTrim(ltrim)
+    # robot.setRightTrim(rtrim)
 
-    return trims
+    return {'L':ltrim,'R':rtrim}
 
 
 def changeMotorSpeeds(data):

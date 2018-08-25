@@ -28,7 +28,12 @@ class MDB():
     def getTrimValues(self):
         left_trim = self.db.robotProperties.find_one({'property':'left_trim'},{'value':1,'_id':0})['value']
         right_trim = self.db.robotProperties.find_one({'property':'right_trim'},{'value':1,'_id':0})['value']
+        # print self.db.robotProperties.find_one({'property':'left_trim'})
         return {'L':left_trim,'R':right_trim}
 
-    def updateTrimValues(self):
-        pass
+    def updateTrimValues(self,ltrim,rtrim):
+        self.db.robotProperties.update_one({'property':'left_trim'},{'$set': {'value':ltrim}})
+        self.db.robotProperties.update_one({'property':'right_trim'},{'$set': {'value':rtrim}})
+        
+    def close(self):
+        self.client.close()

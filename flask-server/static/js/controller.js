@@ -43,9 +43,10 @@ function openSocket() {
     });
 
 	socket.on('initTrim', (data) => {
+		console.log(data)
 		data = JSON.parse(data);
-		$('#lmtrim-val').html(data.L);
-		$('#rmtrim-val').html(data.R);
+		$('#lmtrim-val').html(data['L']);
+		$('#rmtrim-val').html(data['R']);
 	});
 }
 

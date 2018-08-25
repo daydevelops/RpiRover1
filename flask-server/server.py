@@ -57,7 +57,7 @@ def initRobot():
     print('Initializing Robot')
     trims = mdb.getTrimValues()
     emit('initTrim',json.dumps(trims))
-    global robot  # commented out while working on remote
+    global robot
     robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
 
 @socketio.on('shutDownRobot')
@@ -66,12 +66,12 @@ def shutDownRobot():
 	# robot.stop() # commented out while working on remote
 
 
-@socketio.on('leftTrim')
-def updateLeftTrim(changeL,changeR):
-    # input change is 1 or -1
-	trim = robotController.updateTrim(changeL,changeR)
-    print('Updating Motor Trim: L->' + str(trim['L']) + ' R->' + str(trim['R']))
-
+@socketio.on('updateTrim')
+def updateLeftTrim(change):
+    global robot
+    trim = robotController.updateTrim(robot,change['L'],change['R'])
+    print('Updated Motor Trim' + json.dumps(trim))
+    emit('initTrim',json.dumps(trim))
 
 @socketio.on('accelData')
 def addData(msg):
