@@ -3,10 +3,14 @@ from flask import render_template
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import numbers
-import sys
+import sys, json
+import pprint
 
 sys.path.append('robot-control')
-#import robotController # commented out while working on remote
+import robotController # commented out while working on remote
+sys.path.append('db')
+import mongo
+mdb = mongo.MDB()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -31,12 +35,11 @@ def showSensor():
 ### SOCKET IO EVENTS ###
 
 @socketio.on('connect')
-def test_connect():
-    emit('my response', {'data': 'Connected'})
+def connect():
     print("client has connected")
 
-@socketio.on('disconnect', namespace='/test')
-def test_disconnect():
+@socketio.on('disconnect')
+def disconnect():
     print('Client disconnected')
     # robot.stop() # commented out while working on remote
 
@@ -52,8 +55,10 @@ def handle_json(json):
 @socketio.on('initRobot')
 def initRobot():
     print('Initializing Robot')
-    # global robot  # commented out while working on remote
-    # robot = RobotController.initRobot()
+    trims = mdb.getTrimValues()
+    emit('initTrim',json.dumps(trims))
+    global robot  # commented out while working on remote
+    robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
 
 @socketio.on('shutDownRobot')
 def shutDownRobot():
