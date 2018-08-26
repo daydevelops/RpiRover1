@@ -3,13 +3,11 @@ import time
 # import Robot
 import sys
 sys.path.append('db')
-import mongo
+import Logs
+DB = Logs.Logs()
 
 def getTrimValues():
-    conn = mongo.MDB()
-    trims = conn.getTrimValues()
-    conn.close()
-    return trims
+    return DB.getTrimValues()
 
 def initRobot(LEFT_TRIM, RIGHT_TRIM):
     print "initializing robot with l_trim = "+str(LEFT_TRIM)+" and r_trim = "+str(RIGHT_TRIM)
@@ -30,9 +28,7 @@ def updateTrim(robot,changeL,changeR):
     ltrim = ltrim + changeL
     rtrim = rtrim + changeR
     # save to DB
-    conn = mongo.MDB()
-    conn.updateTrimValues(ltrim,rtrim)
-    conn.close()
+    DB.updateTrimValues(ltrim,rtrim)
     # update robot, commented out when working on remote machine
     # robot.setLeftTrim(ltrim)
     # robot.setRightTrim(rtrim)

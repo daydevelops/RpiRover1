@@ -9,8 +9,8 @@ import pprint
 sys.path.append('robot-control')
 import robotController # commented out while working on remote
 sys.path.append('db')
-import mongo
-mdb = mongo.MDB()
+import Logs
+DB = Logs.Logs()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -55,7 +55,7 @@ def handle_json(json):
 @socketio.on('initRobot')
 def initRobot():
     print('Initializing Robot')
-    trims = mdb.getTrimValues()
+    trims = DB.getTrimValues()
     emit('initTrim',json.dumps(trims))
     global robot
     robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
