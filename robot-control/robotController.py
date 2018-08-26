@@ -6,6 +6,7 @@ sys.path.append('db')
 import Logs
 
 def getTrimValues():
+    DB = Logs.Logs()
     return DB.getTrimValues()
 
 def initRobot(LEFT_TRIM, RIGHT_TRIM):
