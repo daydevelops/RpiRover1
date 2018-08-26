@@ -74,8 +74,8 @@ def updateLeftTrim(change):
     print('Updated Motor Trim' + json.dumps(trim))
     emit('initTrim',json.dumps(trim))
 
-@socketio.on('accelData')
-def addData(msg):
+@socketio.on('speedInput')
+def speedInput(msg):
 	print msg
 	#robotController.driveRobot(robot,msg)
 

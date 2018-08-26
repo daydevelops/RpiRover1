@@ -12,14 +12,14 @@
         <div class='container-fluid'>
             <div class='row' id='not-connected'><!-- show this row if user not connect -->
                 <div class='col-12'>
-                    <button class='d-block btn btn-lrg btn-primary' id='power-on-btn'>Power On</button>
+                    <button class='d-block btn btn-lrg btn-primary' id='power-on-btn' onclick='powerOn()'>Power On</button>
                 </div>
             </div>
             <div id='connected'> <!-- show these rows when connected -->
                 <div class='row' id='top-row'>
                     <div class='col-2' id='speed-col'>
                         <!-- Speed slider -->
-                        <input id='speed-input' type='range' orient='vertical'>
+                        <input id='speed-input' type='range' orient='vertical' min='-50' max='50' value='0' step='1' oninput='updateMotorSpeeds()'>
                     </div>
                     <div class='col-6' >
                         <!-- cam -->
@@ -30,32 +30,32 @@
                     </div>
                     <div class='col-2'>
                         <!-- left motor trim -->
-                        <i id='lmtrim-up' class='text-center d-block fas fa-angle-up fa-3x'></i>
+                        <i id='lmtrim-up' class='text-center d-block fas fa-angle-up fa-3x' onclick="changeTrim({'L':1,'R':0})"></i>
                         <p id='lmtrim-val' class='text-center'>0</p>
-                        <i id='lmtrim-down' class='text-center d-block fas fa-angle-down fa-3x'></i>
+                        <i id='lmtrim-down' class='text-center d-block fas fa-angle-down fa-3x' onclick="changeTrim({'L':-1,'R':0})"></i>
                     </div>
                     <div class='col-2'>
                         <!-- right motor trim -->
-                        <i id='rmtrim-up' class='text-center d-block fas fa-angle-up fa-3x'></i>
+                        <i id='rmtrim-up' class='text-center d-block fas fa-angle-up fa-3x' onclick="changeTrim({'L':0,'R':1})"></i>
                         <p id='rmtrim-val' class='text-center'>0</p>
-                        <i id='rmtrim-down' class='text-center d-block fas fa-angle-down fa-3x'></i>
+                        <i id='rmtrim-down' class='text-center d-block fas fa-angle-down fa-3x' onclick="changeTrim({'L':0,'R':-1})"></i>
                     </div>
                 </div>
                 <div class='row' id='bottom-row'>
                     <div class='col-2 p-0'>
-                        <button class='btn btn-lrg btn-danger' id='power-off-btn'>
+                        <button class='btn btn-lrg btn-danger' id='power-off-btn' onclick='powerOff()'>
                             OFF
                         </button>
                     </div>
                     <div class='col-6 text-center'>
                         <!-- cam yaw -->
-                        <i id='cam-left' class='d-inline fas fa-angle-left fa-3x'></i>
+                        <i id='cam-left' class='d-inline fas fa-angle-left fa-3x' onclick="turnCam({'direction':'L'})"></i>
                         <span id='cam-text'>Camera</span>
-                        <i id='cam-right' class='d-inline fas fa-angle-right fa-3x'></i>
+                        <i id='cam-right' class='d-inline fas fa-angle-right fa-3x' onclick="turnCam({'direction':'R'})"></i>
                     </div>
                     <div class='col-4'>
                         <!-- robot heading -->
-                        <input id='heading-input' type='range'>
+                        <input id='heading-input' type='range' min='-50' max='50' value='0' step='1' oninput='updateMotorSpeeds()' onchange='this.value=0'>
                     </div>
                 </div>
             </div>

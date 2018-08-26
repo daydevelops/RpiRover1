@@ -6,17 +6,16 @@ function setUpControllerEvents() {
 
 	console.log('page loaded');
 
-	$('#power-on-btn').click(powerOn);
-	$('#power-off-btn').click(powerOff);
-	// $('#speed-input'). // need to figure out touch and drag events for mobile
-	// $('#heading-input').
-	$('#cam-left').click({'direction':'L'},turnCam);
-	$('#cam-right').click({'direction':'R'},turnCam);
+	// $('#power-on-btn').click(powerOn);
+	// $('#power-off-btn').click(powerOff);
 
-	$('#lmtrim-up').click({'L':1,'R':0}, changeTrim);
-	$('#lmtrim-down').click({'L':-1,'R':0}, changeTrim);
-	$('#rmtrim-up').click({'L':0,'R':1}, changeTrim);
-	$('#rmtrim-down').click({'L':0,'R':-1}, changeTrim);
+	// $('#cam-left').click({'direction':'L'},turnCam);
+	// $('#cam-right').click({'direction':'R'},turnCam);
+
+	// $('#lmtrim-up').click({'L':1,'R':0}, changeTrim);
+	// $('#lmtrim-down').click({'L':-1,'R':0}, changeTrim);
+	// $('#rmtrim-up').click({'L':0,'R':1}, changeTrim);
+	// $('#rmtrim-down').click({'L':0,'R':-1}, changeTrim);
 
 }
 
@@ -76,14 +75,20 @@ function robotOn() {
 
 function updateMotorSpeeds() {
 	// read value of both sliders and send to server
+	console.log('speed: '+$("#speed-input").val()+'    heading: '+$("#heading-input").val())
+	data = {
+		'speed':$('#speed-input').val(),
+		'heading':$('#heading-input').val()
+	}
+	socket.emit('speedInput',data);
 }
 
-function changeTrim(event) {
-	socket.emit('updateTrim',{'L':event.data.L, 'R':event.data.R});
+function changeTrim(data) {
+	socket.emit('updateTrim',{'L':data.L, 'R':data.R});
 	console.log('asking server to update trim');
 }
 
-function turnCam(event) {
+function turnCam(data) {
 	// send change in camera heading left
-	console.log(JSON.stringify(event.data,undefined,4));
+	console.log(JSON.stringify(data,undefined,4));
 }
