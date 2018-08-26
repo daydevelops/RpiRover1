@@ -4,7 +4,6 @@ import time
 import sys
 sys.path.append('db')
 import Logs
-DB = Logs.Logs()
 
 def getTrimValues():
     return DB.getTrimValues()
@@ -20,6 +19,7 @@ def driveRobot(robot,data):
 	robot.rightM(int(motorSpeeds['RM']))
 
 def updateTrim(robot,changeL,changeR):
+    DB = Logs.Logs()
     # get trim from db
     trims = getTrimValues()
     ltrim = trims['L']

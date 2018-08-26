@@ -2,7 +2,7 @@
 
 # set up the db collections
 from tinydb import TinyDB
-db = TinyDB('db/data2/robotProperties.json')
+db = TinyDB('db/data/robotProperties.json')
 db.insert({'property':'left_trim','value':0})
 db.insert({'property':'right_trim','value':0})
 
