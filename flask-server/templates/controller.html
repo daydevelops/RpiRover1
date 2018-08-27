@@ -19,7 +19,7 @@
                 <div class='row' id='top-row'>
                     <div class='col-2' id='speed-col'>
                         <!-- Speed slider -->
-                        <input id='speed-input' type='range' orient='vertical' min='-50' max='50' value='0' step='1' oninput='updateMotorSpeeds()'>
+                        <input id='speed-input' type='range' orient='vertical' min='-50' max='50' value='0' step='1' oninput='updateMotorSpeeds()' onchange='this.value=0'>
                     </div>
                     <div class='col-6' >
                         <!-- cam -->

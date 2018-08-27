@@ -60,15 +60,18 @@ body, html {
 	padding-top:10px
 }
 #speed-input {
+	margin-left:15px;
 	height:100%;
 }
 #heading-input {
 	width:100%;
 	margin-top:15px;
+	margin-right:15px;
 	float:right;
 }
 #cam-wrapper {
-	background-color:#ffffff21
+	background-color:#ffffff21;
+    height:100%;
 }
 #rmtrim-val, #lmtrim-val {
 	margin: 10px 0px 10px 0px;
@@ -92,4 +95,10 @@ input[type=range][orient=vertical]
     width: 8px;
     height: 175px;
     padding: 0 5px;
+}
+#speed-input::-webkit-slider-runnable-track  {
+	background-image: linear-gradient(red,yellow,green,yellow,red);
+}
+#heading-input::-webkit-slider-runnable-track  {
+	background-image: linear-gradient(to right,red,yellow,green,yellow,red);
 }
