@@ -19,12 +19,7 @@ class Logs():
         rp_db.update({'value': ltrim}, Query().property=='left_trim')
         rp_db.update({'value': rtrim}, Query().property=='right_trim')
 
-    # def log(table,data):
-    #     if table=='socket':
-    #         socket_db = TinyDB('db/data/robotProperties.json')
-    #         res = socket_db.insert()
-    #     elif table=='sensor':
-    #         res = self.db.sensorLogs.insert_one(data)
-    #     else:
-    #         print "table not recognized"
-    #     pprint(res.inserted_id)
+    def log(self,table,data):
+        if table=='controllerCommands':
+            cc_db = TinyDB('db/data/controllerCommands.json')
+            cc_db.insert(data)
