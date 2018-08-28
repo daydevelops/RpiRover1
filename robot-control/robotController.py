@@ -1,48 +1,48 @@
 import json
 import time
-# import Robot
+import Robot
 import sys
 sys.path.append('db')
 import Logs
 
 def getTrimValues():
-    DB = Logs.Logs()
-    return DB.getTrimValues()
+	DB = Logs.Logs()
+	return DB.getTrimValues()
 
 def initRobot(LEFT_TRIM, RIGHT_TRIM):
-    print "initializing robot with l_trim = "+str(LEFT_TRIM)+" and r_trim = "+str(RIGHT_TRIM)
-    # robot = Robot.Robot(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM)
-    # return robot
+	print "initializing robot with l_trim = "+str(LEFT_TRIM)+" and r_trim = "+str(RIGHT_TRIM)
+	robot = Robot.Robot(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM)
+	return robot
 
 def driveRobot(robot,data):
-    # DB = Logs.Logs()
-    # DB.log('controllerCommands',data)
-    motorSpeeds = processInputs(data)
-    print ("MC inputs: "+json.dumps(motorSpeeds))
-	# robot.leftM(int(motorSpeeds['LM']))
-	# robot.rightM(int(motorSpeeds['RM']))
+	# DB = Logs.Logs()
+	# DB.log('controllerCommands',data)
+	motorSpeeds = processInputs(data)
+	print ("MC inputs: "+json.dumps(motorSpeeds))
+	robot.leftM(int(motorSpeeds['LM']))
+	robot.rightM(int(motorSpeeds['RM']))
 
 def updateTrim(robot,changeL,changeR):
-    DB = Logs.Logs()
-    # get trim from db
-    trims = getTrimValues()
-    ltrim = trims['L']
-    rtrim = trims['R']
-    # add chagne value
-    ltrim = ltrim + changeL
-    rtrim = rtrim + changeR
-    # save to DB
-    DB.updateTrimValues(ltrim,rtrim)
-    data = {
-        'left_trim':ltrim,
-        'right_trim':rtrim
-    }
-    DB.log('controllerCommands',data)
-    # update robot, commented out when working on remote machine
-    # robot.setLeftTrim(ltrim)
-    # robot.setRightTrim(rtrim)
+	DB = Logs.Logs()
+	# get trim from db
+	trims = getTrimValues()
+	ltrim = trims['L']
+	rtrim = trims['R']
+	# add chagne value
+	ltrim = ltrim + changeL
+	rtrim = rtrim + changeR
+	# save to DB
+	DB.updateTrimValues(ltrim,rtrim)
+	data = {
+		'left_trim':ltrim,
+		'right_trim':rtrim
+	}
+	DB.log('controllerCommands',data)
+	# update robot, commented out when working on remote machine
+	robot.setLeftTrim(ltrim)
+	robot.setRightTrim(rtrim)
 
-    return {'L':ltrim,'R':rtrim}
+	return {'L':ltrim,'R':rtrim}
 
 
 def processInputs(data):

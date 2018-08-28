@@ -45,7 +45,7 @@ def connect():
     global robot
     print('Initializing Robot')
     robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
-    startHeartBeat()
+
 
 @socketio.on('disconnect')
 def disconnect():
@@ -84,4 +84,4 @@ def speedInput(data):
 
 ### run the application
 if __name__ == "__main__":
-    socketio.run(app,"192.168.2.30")
+    socketio.run(app,"192.168.2.19")

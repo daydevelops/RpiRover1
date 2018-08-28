@@ -10,7 +10,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT
 
 
 class Robot(object):
-    def __init__(self, addr=0x60, left_id=3, right_id=2, left_trim=0, right_trim=0,
+    def __init__(self, addr=0x60, left_id=3, right_id=4, left_trim=0, right_trim=0,
                  stop_at_exit=True):
         """Create an instance of the robot.  Can specify the following optional
         parameters:
@@ -141,8 +141,8 @@ class Robot(object):
             self._right_speed(-1*speed)
             self._right.run(Adafruit_MotorHAT.BACKWARD)
 
-    def setLeftTrim(trim):
+    def setLeftTrim(self,trim):
         self._left_trim = trim
 
-    def setRightTrim(trim):
+    def setRightTrim(self,trim):
         self._right_trim = trim
