@@ -12,7 +12,9 @@ sys.path.append('db')
 import Logs
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+# ping client every second
+## if no response after 5, disconnect
+socketio = SocketIO(app,ping_timeout=3,ping_interval=1)
 
 
 ### FLASK PAGES ###
@@ -43,11 +45,15 @@ def connect():
     global robot
     print('Initializing Robot')
     robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
+    startHeartBeat()
 
 @socketio.on('disconnect')
 def disconnect():
     print('Client disconnected')
-    # robot.stop() # commented out while working on remote
+    robotController.driveRobot(robot,{
+        'speed':0,
+        'heading':0
+    })
 
 @socketio.on('message')
 def handle_message(message):
@@ -73,7 +79,6 @@ def updateTrim(change):
 @socketio.on('speedInput')
 def speedInput(data):
     robotController.driveRobot(robot,data)
-
 
 
 
