@@ -6,7 +6,6 @@ function powerOn() {
 	console.log('powering on');
 	openSocket();
 	controllerOn();
-	robotOn();
 }
 
 function powerOff() {
@@ -30,6 +29,7 @@ function openSocket() {
 		$('#lmtrim-val').html(data['L']);
 		$('#rmtrim-val').html(data['R']);
 	});
+
 }
 
 function closeSocket() {
@@ -51,10 +51,6 @@ function controllerOff() {
 	$('#not-connected').css('display','block');
 }
 
-function robotOn() {
-	socket.emit('initRobot')
-	console.log('Robot On');
-}
 
 function updateMotorSpeeds() {
 	// read value of both sliders and send to server

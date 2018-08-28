@@ -35,7 +35,14 @@ def showSensor():
 
 @socketio.on('connect')
 def connect():
-    print("client has connected")
+    print "client has connected"
+    print 'Initializing database'
+    DB = Logs.Logs()
+    trims = DB.getTrimValues()
+    emit('initTrim',json.dumps(trims))
+    global robot
+    print('Initializing Robot')
+    robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
 
 @socketio.on('disconnect')
 def disconnect():
@@ -50,17 +57,6 @@ def handle_message(message):
 def handle_json(json):
     print('received json: ' + str(json))
 
-
-@socketio.on('initRobot')
-def initRobot():
-    print 'Initializing database'
-    DB = Logs.Logs()
-    trims = DB.getTrimValues()
-    emit('initTrim',json.dumps(trims))
-    global robot
-    print('Initializing Robot')
-    robot = robotController.initRobot(LEFT_TRIM=trims['L'],RIGHT_TRIM=trims['R'])
-
 @socketio.on('shutDownRobot')
 def shutDownRobot():
     print('Shutting Down Robot')
@@ -68,7 +64,7 @@ def shutDownRobot():
 
 
 @socketio.on('updateTrim')
-def updateLeftTrim(change):
+def updateTrim(change):
     global robot
     trim = robotController.updateTrim(robot,change['L'],change['R'])
     print('Updated Motor Trim' + json.dumps(trim))
