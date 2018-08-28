@@ -2,23 +2,6 @@ var socket, connected = false;
 
 addEventListener('load',setUpControllerEvents);
 
-function setUpControllerEvents() {
-
-	console.log('page loaded');
-
-	// $('#power-on-btn').click(powerOn);
-	// $('#power-off-btn').click(powerOff);
-
-	// $('#cam-left').click({'direction':'L'},turnCam);
-	// $('#cam-right').click({'direction':'R'},turnCam);
-
-	// $('#lmtrim-up').click({'L':1,'R':0}, changeTrim);
-	// $('#lmtrim-down').click({'L':-1,'R':0}, changeTrim);
-	// $('#rmtrim-up').click({'L':0,'R':1}, changeTrim);
-	// $('#rmtrim-down').click({'L':0,'R':-1}, changeTrim);
-
-}
-
 function powerOn() {
 	console.log('powering on');
 	openSocket();
