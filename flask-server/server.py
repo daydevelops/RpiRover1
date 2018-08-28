@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request
+from flask import render_template
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
 import numbers
