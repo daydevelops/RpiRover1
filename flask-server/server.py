@@ -13,7 +13,7 @@ import Logs
 
 app = Flask(__name__)
 # ping client every second
-## if no response after 5, disconnect
+## if no response after 3, disconnect
 socketio = SocketIO(app,ping_timeout=3,ping_interval=1)
 
 
