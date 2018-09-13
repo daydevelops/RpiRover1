@@ -1,6 +1,12 @@
 import json
 import time
-import Robot
+
+# RobotTest is a simulated Robot class without any hardware manipulation,
+# used for testing on any machine otehr than the Rpi itself
+
+import RobotTest as Robot
+# import Robot
+
 import sys
 sys.path.append('db')
 import Logs
