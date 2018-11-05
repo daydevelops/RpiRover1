@@ -4,6 +4,7 @@ import time
 
 class Logs():
     def __init__(self):
+        self.cc_logs = "" # buffer for db
         pass
         # print 'Database ready'
 
@@ -21,5 +22,13 @@ class Logs():
 
     def log(self,table,data):
         if table=='controllerCommands':
-            cc_db = TinyDB('db/data/controllerCommands.json')
-            cc_db.insert(data)
+            if self.cc_logs!="":
+                self.cc_logs += ','+data
+            else:
+                self.cc_logs += data
+
+            if len(self.cc_logs)>200:
+                print "dumping"
+                cc_db = TinyDB('db/data/controllerCommands.json')
+                cc_db.insert(self.cc_logs)
+                self.cc_logs = ""

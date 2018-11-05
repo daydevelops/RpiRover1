@@ -10,9 +10,10 @@ import RobotTest as Robot
 import sys
 sys.path.append('db')
 import Logs
+DB = Logs.Logs()
 
 def getTrimValues():
-	DB = Logs.Logs()
+	global DB
 	return DB.getTrimValues()
 
 def initRobot(LEFT_TRIM, RIGHT_TRIM):
@@ -21,15 +22,15 @@ def initRobot(LEFT_TRIM, RIGHT_TRIM):
 	return robot
 
 def driveRobot(robot,data):
-	# DB = Logs.Logs()
-	# DB.log('controllerCommands',data)
+	global DB
+	DB.log('controllerCommands',data)
 	motorSpeeds = processInputs(data)
 	print ("MC inputs: "+json.dumps(motorSpeeds))
 	robot.leftM(int(motorSpeeds['LM']))
 	robot.rightM(int(motorSpeeds['RM']))
 
 def updateTrim(robot,changeL,changeR):
-	DB = Logs.Logs()
+	global DB
 	# get trim from db
 	trims = getTrimValues()
 	ltrim = trims['L']

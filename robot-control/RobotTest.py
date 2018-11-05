@@ -62,7 +62,7 @@ class Robot(object):
     def leftM(self, speed):
         """Spin left motor at given speed"""
         # print "turning left motor"
-        print speed
+        # print speed
         if speed>0:
             self._left_speed(speed)
             # self._left.run(Adafruit_MotorHAT.FORWARD)
@@ -73,7 +73,7 @@ class Robot(object):
     def rightM(self, speed):
         """Spin right motor at given speed"""
         # print "turning right motor"
-        print speed
+        # print speed
         if speed>0:
             self._right_speed(speed)
             # self._right.run(Adafruit_MotorHAT.FORWARD)
