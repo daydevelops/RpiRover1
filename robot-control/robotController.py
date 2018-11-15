@@ -54,8 +54,8 @@ def updateTrim(robot,changeL,changeR):
 
 def processInputs(data):
 	# acceptable range of input data:
-	#	y:[-100:100]
-	#	x:[-100:100]
+	#	y:[-200:200]
+	#	x:[-200:200]
 	#
 	# acceptable range for motor commands:
 	#	max defined by motor controller: [0:255]
@@ -63,7 +63,7 @@ def processInputs(data):
 
 	# Left motor -> LM
 	# Right motor -> RM
-	RM = (int(data['speed']) - int(data['heading'])) * 0.5
-	LM = (int(data['speed']) + int(data['heading'])) *0.5
+	RM = (int(data['speed']) - int(data['heading'])) 
+	LM = (int(data['speed']) + int(data['heading']))
 
 	return {'RM':RM,"LM":LM}

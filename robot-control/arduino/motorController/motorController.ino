@@ -1,8 +1,9 @@
 #include <string.h>
-
+// motor 1
 int enA = 10;
 int in1 = 9; 
 int in2 = 8;
+// motor 2
 int in3 = 7;
 int in4 = 6;
 int enB = 5;
@@ -35,17 +36,36 @@ void processMessage(char command, String msg) {
 }
 
 void changeLeftMotor(int speed) {
-  Serial.println("changing left");
-  Serial.println(speed*2);
+  if (speed<0) {
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,LOW);
+    speed = speed*-1;
+  } else {
+    digitalWrite(in1,LOW);
+    digitalWrite(in2,HIGH);
+  }
+  analogWrite(enA,speed);
 }
 
 void changeRightMotor(int speed) {
-  Serial.println("changing right");
-  Serial.println(speed+1);
+  if (speed<0) {
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,LOW);
+    speed = speed*-1;
+  } else {
+    digitalWrite(in3,LOW);
+    digitalWrite(in4,HIGH);
+  }
+  analogWrite(enB,speed);
 }
 
 void stopMotors() {
-  Serial.println('Stopping motors');
+  digitalWrite(in1,LOW);
+  digitalWrite(in2,LOW);
+  digitalWrite(in3,LOW);
+  digitalWrite(in4,LOW);
+  analogWrite(enA,0);
+  analogWrite(enB,0);
 }
 
 void loop() {
