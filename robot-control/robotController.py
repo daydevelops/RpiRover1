@@ -4,7 +4,7 @@ import time
 # RobotTest is a simulated Robot class without any hardware manipulation,
 # used for testing on any machine otehr than the Rpi itself
 
-import RobotTest as Robot
+import Robot as Robot
 # import Robot
 
 import sys
@@ -23,7 +23,7 @@ def initRobot(LEFT_TRIM, RIGHT_TRIM):
 
 def driveRobot(robot,data):
 	global DB
-	DB.log('controllerCommands',data)
+	#DB.log('controllerCommands',data)
 	motorSpeeds = processInputs(data)
 	print ("MC inputs: "+json.dumps(motorSpeeds))
 	robot.leftM(int(motorSpeeds['LM']))

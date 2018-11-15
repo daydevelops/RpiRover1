@@ -84,4 +84,4 @@ def speedInput(data):
 
 ### run the application
 if __name__ == "__main__":
-    socketio.run(app,"10.139.58.104")#,"192.168.2.19")
+    socketio.run(app,"192.168.2.19")
